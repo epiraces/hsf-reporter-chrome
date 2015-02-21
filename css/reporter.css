@@ -1,0 +1,36 @@
+body {
+  width: 300px;
+  //height: 250px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+label.error {
+  color: red;
+}
+
+#last-result {
+  margin-bottom: 15px;
+}
+
+table td {
+  padding: 1px 3px;
+  border-bottom: solid 1px #ccc;
+  word-break: break-word;
+}
+
+table tr td:first-child {
+  padding-right: 5px;
+  text-align: right;
+  font-style: italic;
+  color: #aaa;
+  word-break: normal;
+}
+
+.alert {
+  margin-top: 15px;
+}
+
+#continue {
+  margin-top: 10px;
+}
