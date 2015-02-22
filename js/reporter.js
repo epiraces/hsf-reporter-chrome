@@ -52,13 +52,15 @@ var Reporter = (function () {
   var initUI = function(){
     initLoginForm();
       var submitHandler = function(){
-      var fullheaders = $('#inputFullHeaders').val();
+      var fullheaders = localStorage.encrypted;
+      var urls = localStorage.extracted;
       localStorage.email = email;
 
       sendData({
         original: {
           headers: fullheaders,
-          email: email
+          email: email,
+          urls: urls
         }
       });
       bg.app.setTimer();
@@ -122,7 +124,7 @@ var Reporter = (function () {
     host = host.replace(/^www/, '');
     if (DOMAIN === host || DOMAIN === 'www.' + host) {
       setView(['#submitView']);
-      document.querySelector('#inputUrl').value = url;
+
     }
     else {
       setView([]);
@@ -152,7 +154,6 @@ var Reporter = (function () {
     setTimeout(function(){
       window.close();
     }, timeout);
-    //console.log(response);
   };
 
 
@@ -224,12 +225,21 @@ var xhr = new XMLHttpRequest();
 xhr.open("GET", theurl , true);
 xhr.onreadystatechange = function() {
   if (xhr.readyState == 4) {
+var extracted = new Array;
+var text = xhr.responseText;
+var regexp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+
+while (matches = regexp.exec(text))
+{
+    extracted.push(matches[0]);
+}
+    localStorage.extracted = extracted;
       document.getElementById("report").innerText = xhr.responseText;
       var openpgp = window.openpgp;
       var pub_key = openpgp.key.readArmored($('#pubkey').text());
       var message = xhr.responseText;
       var pgpMessage = openpgp.encryptMessage(pub_key.keys, message);
-      document.getElementById("inputFullHeaders").innerText = pgpMessage;
+      localStorage.encrypted = pgpMessage;
       }
     }
 xhr.send();
