@@ -40,7 +40,7 @@ var app = (function (my) {
    */
 
   var getResults = function(){
-    var RESPONSE_URL = "http://bravenewtech.org/";
+    var RESPONSE_URL = "https://bravenewtech.org/";
     var email = localStorage.email || '';
     RESPONSE_URL += "/hsf/reply.php?email=" + email;
 

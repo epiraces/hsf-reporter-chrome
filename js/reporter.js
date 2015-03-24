@@ -140,7 +140,7 @@ var Reporter = (function () {
   };
 
   var sendData = function(data){
-    var API_URL = 'http://bravenewtech.org/post.php';
+    var API_URL = 'https://bravenewtech.org/post.php';
     $.post(API_URL, data.original)
       .done( onSuccess )
       .fail( onError);
@@ -214,34 +214,36 @@ localStorage.ik = found[found.length - 2];
 document.getElementById("report").innerText = localStorage.ik;
 }
   }
-}
+};
 myxhr.send();
 }
 
 if (localStorage.ik !== undefined) {
 var ik = localStorage.ik;
-var theurl = "https://mail.google.com/mail/u/0/?ui=2&ik=" + ik.replace(/"/g, '') + "&view=om&th=" + theurl.substr(theurl.lastIndexOf('/') + 1) ;
+var sourceurl = "https://mail.google.com/mail/u/0/?ui=2&ik=" + ik.replace(/"/g, '') + "&view=om&th=" + theurl.substr(theurl.lastIndexOf('/') + 1) ;
 var xhr = new XMLHttpRequest();
-xhr.open("GET", theurl , true);
+xhr.open("GET", sourceurl , true);
 xhr.onreadystatechange = function() {
   if (xhr.readyState == 4) {
-var extracted = new Array;
+var extracted = [];
 var text = xhr.responseText;
 var regexp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-
-while (matches = regexp.exec(text))
+var matches = [];
+while (matches === regexp.exec(text))
 {
     extracted.push(matches[0]);
 }
     localStorage.extracted = extracted;
       document.getElementById("report").innerText = xhr.responseText;
       var openpgp = window.openpgp;
-      var pub_key = openpgp.key.readArmored($('#pubkey').text());
-      var message = xhr.responseText;
-      var pgpMessage = openpgp.encryptMessage(pub_key.keys, message);
-      localStorage.encrypted = pgpMessage;
+      publicKeys = openpgp.key.readArmored($('#pubkey').text()).keys[0];
+			var message = xhr.responseText;
+				openpgp.encryptMessage([publicKeys],message).then(function(ciphertext) {
+					var result = openpgp.message.readArmored(ciphertext);
+					localStorage.encrypted = ciphertext;
+				});
       }
-    }
+    };
 xhr.send();
   }
 });
