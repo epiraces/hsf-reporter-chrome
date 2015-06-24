@@ -63,7 +63,6 @@ var Reporter = (function() {
             });
             bg.app.setTimer();
         };
-
         var $form = $('#submitForm');
         // Validation
         $form.validate({

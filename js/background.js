@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var STATES = {
     default: 1,
     inprogress: 2,
@@ -78,7 +77,6 @@ var app = (function(my) {
 })(app || {});
 
 app.init();
-=======
 var STATES = {
   default: 1,
   inprogress: 2,
@@ -158,4 +156,3 @@ var app = (function (my) {
 
 
 app.init();
->>>>>>> c73b5f5eb8ee509f6129071d235d01d94e9e8a8f
