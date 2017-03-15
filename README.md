@@ -1,5 +1,7 @@
 # HSF Reporter
 
+**This project activity is moving to a new repository. I am refactoring middleware, extensions and add-ons**
+
 Summary
 
 This is a Chrome extension for the submission of potential spearfishing and malware samples to the HSF engine. It is a proof of concept in the context of a larger project named Harms Stories Framework (HSF). This extension, as a proof of concept, works only for Gmail. Other modules or plugins may be develop after this proof of concept for other providers or as extensions, add-ons or plugins for other browsers or email clients.
