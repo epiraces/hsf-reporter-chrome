@@ -16,6 +16,8 @@ After a successful submission, users will receive a ticket confirming the submis
 
 The current version is available in the Chrome Store at https://chrome.google.com/webstore/detail/hsf-reporter/jelkpbipoleejjoifbdlkljojmehaogl
 
+The original idea, which since then have been updated quite a bit, is explained in this infographic: https://bravenewtech.org/hsf/hsf.jpeg
+
 Ideas and comments are welcome.
 
 Cautionary notes:
